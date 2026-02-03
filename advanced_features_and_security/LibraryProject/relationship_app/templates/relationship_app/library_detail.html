@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Library Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #2196F3;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #555;
+            margin-top: 30px;
+        }
+
+        .library-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .librarian-info {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 12px;
+            margin: 8px 0;
+            background: #f9f9f9;
+            border-left: 4px solid #2196F3;
+            border-radius: 4px;
+        }
+
+        .book-count {
+            color: #666;
+            font-style: italic;
+        }
+
+        .navigation {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        .nav-link {
+            display: inline-block;
+            margin-right: 15px;
+            padding: 10px 15px;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .nav-link.secondary {
+            background: #9E9E9E;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🏛️ Library: {{ library.name }}</h1>
+
+        <div class="library-info">
+            <h3>Library Information</h3>
+            <p><strong>Total Books:</strong> {{ library.books.count }}</p>
+        </div>
+
+        {% if library.librarian %}
+        <div class="librarian-info">
+            <h3>👤 Librarian</h3>
+            <p><strong>Name:</strong> {{ library.librarian.name }}</p>
+        </div>
+        {% endif %}
+
+        <h2>📖 Books in this Library:</h2>
+        <p class="book-count">Showing {{ library.books.count }} books</p>
+
+        <ul>
+            {% for book in library.books.all %}
+            <li>
+                <strong>{{ book.title }}</strong>
+                by {{ book.author.name }}
+                {% if book.publication_year %}
+                (Published {{ book.publication_year }})
+                {% endif %}
+            </li>
+            {% empty %}
+            <li>No books available in this library.</li>
+            {% endfor %}
+        </ul>
+
+        <div class="navigation">
+            <a href="{% url 'relationship_app:book-list' %}" class="nav-link">View All Books</a>
+            <a href="{% url 'relationship_app:library-list' %}" class="nav-link secondary">Back to Libraries</a>
+            <a href="/admin" class="nav-link" style="background: #2196F3;">Admin Panel</a>
+        </div>
+    </div>
+</body>
+
+</html>
