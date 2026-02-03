@@ -1,3 +1,3 @@
 # LibraryProject
 
-This is a Django project created for the ALX Introduction to Django task.
+A Django project for managing library resources.
