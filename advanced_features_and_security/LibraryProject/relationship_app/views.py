@@ -4,10 +4,9 @@ from django.views.generic.detail import DetailView
 from .models import Book
 from .models import Library
 from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.decorators import permission_required
-from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 from django.forms import modelform_factory
 
 # Function-based view: List all books
